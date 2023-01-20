@@ -1,0 +1,12 @@
+G:filename
+G:optind
+G:res_unit
+G:snapshot_env
+S:TIFF2PS.npages_ptr_ssrcslibtiffstoolsstiff2psdc:TIFF2PS.npages:4
+S:alpha_ptr_ssrcslibtiffstoolsstiff2psdc:alpha:4
+S:main._B_ptr_ssrcslibtiffstoolsstiff2psdc:main._B:8
+S:pageOrientation_ptr_ssrcslibtiffstoolsstiff2psdc:pageOrientation:12
+S:photometric_ptr_ssrcslibtiffstoolsstiff2psdc:photometric:2
+S:ps_bytesperrow_ptr_ssrcslibtiffstoolsstiff2psdc:ps_bytesperrow:8
+S:tf_bytesperrow_ptr_ssrcslibtiffstoolsstiff2psdc:tf_bytesperrow:8
+S:tf_numberstrips_ptr_ssrcslibtiffstoolsstiff2psdc:tf_numberstrips:4

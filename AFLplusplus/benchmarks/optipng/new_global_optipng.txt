@@ -1,0 +1,16 @@
+S:engine.0_ptr_optimdc:engine.0:0
+S:image_ptr_optimdc:image:160
+S:operation_ptr_optipngdc:operation:4
+S:opng_optimize_impl.bakfile_name_ptr_optimdc:opng_optimize_impl.bakfile_name:8
+S:opng_optimize_impl.infile_name_local_ptr_optimdc:opng_optimize_impl.infile_name_local:8
+S:opng_optimize_impl.infile_ptr_optimdc:opng_optimize_impl.infile:8
+S:opng_optimize_impl.new_outfile_ptr_optimdc:opng_optimize_impl.new_outfile:4
+S:opng_optimize_impl.outfile_name_ptr_optimdc:opng_optimize_impl.outfile_name:8
+S:options_ptr_optipngdc:options:120
+S:process_ptr_optimdc:process:112
+S:read_info_ptr_ptr_optimdc:read_info_ptr:8
+S:read_ptr_ptr_optimdc:read_ptr:8
+S:start_of_line_ptr_optipngdc:start_of_line:4
+S:summary_ptr_optimdc:summary:16
+S:the_exception_context_ptr_optimdc:the_exception_context:24
+S:usr_panic_ptr_optimdc:usr_panic:8

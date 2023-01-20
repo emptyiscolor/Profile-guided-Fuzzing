@@ -1,0 +1,95 @@
+
+objdump: 
+all: (‘Total processed vars:', '284')
+('Total memory pages to be modified: ', 16)
+var
+('Total processed vars:', '56')
+('Total memory pages to be modified: ', 5)
+
+readelf:
+all:
+('Total processed vars:', '219')
+('Total memory pages to be modified: ', 10)
+
+var:
+('Total processed vars:', '75')
+('Total memory pages to be modified: ', 6)
+
+djpeg:
+all: 
+('Total processed vars:', '5')
+('Total memory pages to be modified: ', 1)
+
+var: (‘Total processed vars:', '3')
+('Total memory pages to be modified: ', 1)
+
+
+tiff2ps:
+all:
+('Total processed vars:', '53')
+('Total memory pages to be modified: ', 3)
+
+('Total processed vars:', '21')
+('Total memory pages to be modified: ', 2)
+
+Tidy
+all:
+('Total processed vars:', '41')
+('Total memory pages to be modified: ', 12)
+var:
+('Total processed vars:', '9')
+('Total memory pages to be modified: ', 5)
+
+xmllint
+('Total processed vars:', '253')
+('Total memory pages to be modified: ', 10)
+
+('Total processed vars:', '27')
+('Total memory pages to be modified: ', 6)
+
+woff2
+all:
+('Total processed vars:', '11')
+('Total memory pages to be modified: ', 1)
+var:
+('Total processed vars:', '3')
+('Total memory pages to be modified: ', 1)
+
+qjsall
+('Total processed vars:', '22')
+('Total memory pages to be modified: ', 3)
+var:
+('Total processed vars:', '3')
+('Total memory pages to be modified: ', 3)
+
+optipng
+all
+('Total processed vars:', '80')
+('Total memory pages to be modified: ', 4)
+var:
+('Total processed vars:', '24')
+('Total memory pages to be modified: ', 2)
+
+tcpdump
+all:
+('Total processed vars:', '593')
+('Total memory pages to be modified: ', 46)
+var:
+('Total processed vars:', '34')
+('Total memory pages to be modified: ', 16)
+
+unrtf
+all:
+('Total processed vars:', '107')
+('Total memory pages to be modified: ', 7)
+var:
+('Total processed vars:', '39')
+('Total memory pages to be modified: ', 4)
+
+mupdf
+all:
+('Total processed vars:', '472')
+('Total memory pages to be modified: ', 61)
+var:
+('Total processed vars:', '37')
+('Total memory pages to be modified: ', 13)

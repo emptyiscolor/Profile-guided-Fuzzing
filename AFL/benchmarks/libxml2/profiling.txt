@@ -1,0 +1,77 @@
+### Fork Server(SSD)
+6007 ms total work, 161207 ns/work,             
+22624 ms total running, 607131 ns/run, 
+1167 ms total write testcase, 31318 ns/write             
+2605 ms total forking, 69929 ns/fork, 
+18670 ms total purely run, 501024 ns/purely run             
+44278 ns/system running, 440371 ns/user running             
+6007 ms total pre-fuzzing, 161207 ns/pre-fuzzing,             
+0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+      23628.045682      task-clock (msec)         #    0.943 CPUs utilized
+           150,618      context-switches          #    0.006 M/sec
+               958      cpu-migrations            #    0.041 K/sec
+         3844586      page-faults               #    0.163 M/sec
+
+### Fork Server(TMPFS)
+
+ 5300 ms total work, 142240 ns/work,             
+ 22374 ms total running, 600441 ns/run, 
+ 697 ms total write testcase, 18713 ns/write             
+ 2677 ms total forking, 71841 ns/fork, 
+ 18373 ms total purely run, 493067 ns/purely run             
+ 40790 ns/system running, 436614 ns/user running             
+ 5300 ms total pre-fuzzing, 142240 ns/pre-fuzzing,             
+ 0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 37264
+
+      24261.422556      task-clock (msec)         #    0.942 CPUs utilized
+           150,719      context-switches          #    0.006 M/sec
+             1,028      cpu-migrations            #    0.042 K/sec
+         3870182      page-faults               #    0.160 M/sec
+
+### Snapshot:
+ 5463 ms total work, 146619 ns/work,             
+ 12174 ms total running, 326706 ns/run, 
+ 589 ms total write testcase, 15831 ns/write             
+ 189 ms total forking, 5091 ns/fork, 
+ 10603 ms total purely run, 284558 ns/purely run            
+ 0 ns/system running, 0 ns/user running             
+ 5463 ms total pre-fuzzing, 146619 ns/pre-fuzzing,             
+ 0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+
+      14133.874318      task-clock (msec)         #    0.919 CPUs utilized
+           223,248      context-switches          #    0.016 M/sec
+             3,405      cpu-migrations            #    0.241 K/sec
+           822524      page-faults               #    0.058 M/sec
+
+### VAR_REC:
+8277 ms total work, 221747 ns/work,             
+9446 ms total running, 253054 ns/run, 
+747 ms total write testcase, 20018 ns/write             
+230 ms total forking, 6176 ns/fork, 
+7742 ms total purely run, 207410 ns/purely run             
+62687 ns/system running, 124571 ns/user running             
+8277 ms total pre-fuzzing, 221747 ns/pre-fuzzing,             
+0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+      12688.394947      task-clock (msec)         #    0.833 CPUs utilized
+           222,893      context-switches          #    0.018 M/sec
+             6,315      cpu-migrations            #    0.498 K/sec
+            86601      page-faults               #    0.007 M/sec
+
+### VAR_REC_VFS:
+7634 ms total work, 204512 ns/work,             
+8362 ms total running, 224018 ns/run, 
+26 ms total write testcase, 709 ns/write             
+231 ms total forking, 6214 ns/fork, 
+6753 ms total purely run, 180916 ns/purely run             
+42595 ns/system running, 118141 ns/user running             
+7634 ms total pre-fuzzing, 204512 ns/pre-fuzzing,             
+0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+      11059.471130      task-clock (msec)         #    0.917 CPUs utilized
+           222,529      context-switches          #    0.020 M/sec
+             7,988      cpu-migrations            #    0.722 K/sec
+            86990      page-faults               #    0.008 M/sec

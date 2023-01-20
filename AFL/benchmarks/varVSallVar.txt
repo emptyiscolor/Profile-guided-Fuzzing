@@ -1,0 +1,115 @@
+## objdump
+var:
+6824 ms total work, 136686 ns/work,             11560 ms total running, 231551 ns/run, 929 ms total write testcase, 18622 ns/write             294 ms total forking, 5891 ns/fork, 9344 ms total purely run, 187167 ns/purely run             38855 ns/system running, 128985 ns/user running             6824 ms total pre-fuzzing, 136686 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+all var:
+ 6899 ms total work, 138182 ns/work,             11936 ms total running, 239083 ns/run, 946 ms total write testcase, 18962 ns/write             299 ms total forking, 6008 ns/fork, 9725 ms total purely run, 194789 ns/purely run             42861 ns/system running, 131389 ns/user running             6899 ms total pre-fuzzing, 138182 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+## readelf
+var:
+7907 ms total work, 133144 ns/work,             11653 ms total running, 196209 ns/run, 1111 ms total write testcase, 18706 ns/write             348 ms total forking, 5866 ns/fork, 9049 ms total purely run, 152364 ns/purely run             38894 ns/system running, 98161 ns/user running             7907 ms total pre-fuzzing, 133144 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 59392
+
+vall var:
+
+7756 ms total work, 130873 ns/work,             11481 ms total running, 193728 ns/run, 1088 ms total write testcase, 18367 ns/write             346 ms total forking, 5850 ns/fork, 8970 ms total purely run, 151358 ns/purely run             38134 ns/system running, 98879 ns/user running             7756 ms total pre-fuzzing, 130873 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 59264
+
+## djpeg
+var:
+2777 ms total work, 130814 ns/work,             14551 ms total running, 685367 ns/run, 400 ms total write testcase, 18866 ns/write             127 ms total forking, 6026 ns/fork, 13610 ms total purely run, 641033 ns/purely run             100791 ns/system running, 518085 ns/user running             2777 ms total pre-fuzzing, 130814 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+all var:
+ 2904 ms total work, 136779 ns/work,             14643 ms total running, 689674 ns/run, 415 ms total write testcase, 19581 ns/write             129 ms total forking, 6118 ns/fork, 13679 ms total purely run, 644267 ns/purely run             91371 ns/system running, 530331 ns/user running             2904 ms total pre-fuzzing, 136779 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+## tiff2ps
+var:
+ 3546 ms total work, 147360 ns/work,             7551 ms total running, 313788 ns/run, 683 ms total write testcase, 28420 ns/write             144 ms total forking, 5998 ns/fork, 6466 ms total purely run, 268730 ns/purely run             53607 ns/system running, 173703 ns/user running             3546 ms total pre-fuzzing, 147360 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+all var:
+ 3715 ms total work, 154416 ns/work,             7810 ms total running, 324591 ns/run, 726 ms total write testcase, 30201 ns/write             153 ms total forking, 6363 ns/fork, 6673 ms total purely run, 277312 ns/purely run             59009 ns/system running, 175365 ns/user running             3715 ms total pre-fuzzing, 154416 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+
+## libxml2 *
+var:
+8268 ms total work, 221514 ns/work,             9312 ms total running, 249483 ns/run, 748 ms total write testcase, 20059 ns/write             231 ms total forking, 6202 ns/fork, 7655 ms total purely run, 205083 ns/purely run             63223 ns/system running, 121356 ns/user running             8268 ms total pre-fuzzing, 221514 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 37328
+
+all var:
+
+ 7687 ms total work, 206117 ns/work,             9436 ms total running, 253022 ns/run, 822 ms total write testcase, 22059 ns/write             301 ms total forking, 8078 ns/fork, 7117 ms total purely run, 190849 ns/purely run             0 ns/system running, 0 ns/user running             7687 ms total pre-fuzzing, 206117 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 37296
+
+### var's corpus:
+var: 
+8405 ms total work, 221485 ns/work,             9355 ms total running, 246519 ns/run, 760 ms total write testcase, 20050 ns/write             236 ms total forking, 6227 ns/fork, 7647 ms total purely run, 201514 ns/purely run             59548 ns/system running, 114618 ns/user running             8405 ms total pre-fuzzing, 221485 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 37952
+
+all var:
+7579 ms total work, 200043 ns/work,             8169 ms total running, 215629 ns/run, 726 ms total write testcase, 19178 ns/write             219 ms total forking, 5790 ns/fork, 6539 ms total purely run, 172592 ns/purely run             0 ns/system running, 0 ns/user running             7579 ms total pre-fuzzing, 200043 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 37888
+
+
+## Tcpdump
+var:
+10917 ms total work, 179757 ns/work,             11574 ms total running, 190577 ns/run, 1764 ms total write testcase, 29059 ns/write             396 ms total forking, 6531 ns/fork, 8857 ms total purely run, 145828 ns/purely run             33258 ns/system running, 97141 ns/user running             10917 ms total pre-fuzzing, 179757 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 60736
+
+all var:
+ 10932 ms total work, 179898 ns/work,             13292 ms total running, 218736 ns/run, 1752 ms total write testcase, 28843 ns/write             367 ms total forking, 6043 ns/fork, 10756 ms total purely run, 177006 ns/purely run             38342 ns/system running, 123255 ns/user running             10932 ms total pre-fuzzing, 179898 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 60768
+
+## mutool
+var:
+ 2909 ms total work, 179317 ns/work,             12257 ms total running, 755510 ns/run, 362 ms total write testcase, 22369 ns/write             102 ms total forking, 6293 ns/fork, 11518 ms total purely run, 709964 ns/purely run             56089 ns/system running, 626849 ns/user running             2909 ms total pre-fuzzing, 179317 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 16224
+
+all var:
+2709 ms total work, 166981 ns/work,             12577 ms total running, 775268 ns/run, 328 ms total write testcase, 20270 ns/write             98 ms total forking, 6085 ns/fork, 11862 ms total purely run, 731186 ns/purely run             55473 ns/system running, 648422 ns/user running             2709 ms total pre-fuzzing, 166981 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 16224
+
+## unrtf
+var:
+1891 ms total work, 274591 ns/work,             6811 ms total running, 988848 ns/run, 145 ms total write testcase, 21094 ns/write             41 ms total forking, 6088 ns/fork, 6484 ms total purely run, 941491 ns/purely run             56620 ns/system running, 489256 ns/user running             1891 ms total pre-fuzzing, 274591 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 6888
+
+all var:
+1871 ms total work, 272976 ns/work,             6850 ms total running, 999226 ns/run, 147 ms total write testcase, 21540 ns/write             43 ms total forking, 6297 ns/fork, 6532 ms total purely run, 952742 ns/purely run             59801 ns/system running, 523628 ns/user running             1871 ms total pre-fuzzing, 272976 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 6856
+
+## optipng
+var:
+1263 ms total work, 147633 ns/work,             2153 ms total running, 251546 ns/run, 263 ms total write testcase, 30769 ns/write             55 ms total forking, 6479 ns/fork, 1744 ms total purely run, 203847 ns/purely run             33878 ns/system running, 146028 ns/user running             1263 ms total pre-fuzzing, 147633 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+all var:
+1236 ms total work, 144397 ns/work,             2149 ms total running, 251063 ns/run, 253 ms total write testcase, 29658 ns/write             54 ms total forking, 6392 ns/fork, 1762 ms total purely run, 205870 ns/purely run             32710 ns/system running, 150700 ns/user running             1236 ms total pre-fuzzing, 144397 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 8560
+
+### tidy
+var:
+9201 ms total work, 186329 ns/work,             70862 ms total running, 1434926 ns/run, 1623 ms total write testcase, 32874 ns/write             322 ms total forking, 6528 ns/fork, 68555 ms total purely run, 1388218 ns/purely run             280455 ns/system running, 995261 ns/user running             9201 ms total pre-fuzzing, 186329 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 49384
+
+all var:
+
+8971 ms total work, 181668 ns/work,             71611 ms total running, 1450085 ns/run, 1600 ms total write testcase, 32403 ns/write             323 ms total forking, 6550 ns/fork, 69317 ms total purely run, 1403638 ns/purely run             292807 ns/system running, 998704 ns/user running             8971 ms total pre-fuzzing, 181668 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+
+### woff2:
+var:
+1146 ms total work, 141656 ns/work,             2949 ms total running, 364275 ns/run, 161 ms total write testcase, 20008 ns/write             48 ms total forking, 6014 ns/fork, 2596 ms total purely run, 320748 ns/purely run             45701 ns/system running, 256916 ns/user running             1146 ms total pre-fuzzing, 141656 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 8096
+
+all var:
+1142 ms total work, 141069 ns/work,             3033 ms total running, 374720 ns/run, 165 ms total write testcase, 20410 ns/write             49 ms total forking, 6107 ns/fork, 2674 ms total purely run, 330298 ns/purely run             48171 ns/system running, 261857 ns/user running             1142 ms total pre-fuzzing, 141069 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 8096
+
+### qjs
+var:
+ 10362 ms total work, 162077 ns/work,             54917 ms total running, 858939 ns/run, 1297 ms total write testcase, 20290 ns/write             373 ms total forking, 5840 ns/fork, 52238 ms total purely run, 817042 ns/purely run             29717 ns/system running, 693662 ns/user running             10362 ms total pre-fuzzing, 162077 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 63936
+
+all var:
+10732 ms total work, 167778 ns/work,             55962 ms total running, 874844 ns/run, 1370 ms total write testcase, 21422 ns/write             398 ms total forking, 6224 ns/fork, 53087 ms total purely run, 829912 ns/purely run             28920 ns/system running, 704727 ns/user running             10732 ms total pre-fuzzing, 167778 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 63968
+
+

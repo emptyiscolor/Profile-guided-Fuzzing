@@ -1,0 +1,18 @@
+### Fork Server(SSD)
+
+
+### Fork Server(TMPFS)
+ 3621 ms total work, 222779 ns/work,             176256 ms total running, 10843877 ns/run, 512 ms total write testcase, 31527 ns/write             1447 ms total forking, 89045 ns/fork, 174060 ms total purely run, 10708780 ns/purely run             7160698 ns/system running, 3389934 ns/user running             3621 ms total pre-fuzzing, 222779 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 16254
+
+### Snapshot:
+2930 ms total work, 180641 ns/work,             19585 ms total running, 1207210 ns/run, 295 ms total write testcase, 18189 ns/write             90 ms total forking, 5606 ns/fork, 18822 ms total purely run, 1160143 ns/purely run             0 ns/system running, 0 ns/user running             2930 ms total pre-fuzzing, 180641 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 16224
+
+### VAR_REC:
+2866 ms total work, 176706 ns/work,             12477 ms total running, 769074 ns/run, 352 ms total write testcase, 21712 ns/write             107 ms total forking, 6625 ns/fork, 11738 ms total purely run, 723536 ns/purely run             54857 ns/system running, 641025 ns/user running             2866 ms total pre-fuzzing, 176706 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 16224
+
+### VAR_REC_VFS:
+2568 ms total work, 158308 ns/work,             12038 ms total running, 742042 ns/run, 11 ms total write testcase, 700 ns/write             106 ms total forking, 6535 ns/fork, 11276 ms total purely run, 695025 ns/purely run             32667 ns/system running, 632396 ns/user running             2568 ms total pre-fuzzing, 158308 ns/pre-fuzzing,             0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 16224

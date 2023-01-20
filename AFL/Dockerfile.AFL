@@ -1,0 +1,43 @@
+FROM gcr.io/fuzzbench/base-image
+
+# Download and compile AFL v2.57b.
+# Set AFL_NO_X86 to skip flaky tests.
+
+# Use afl_driver.cpp from LLVM as our fuzzing library.
+RUN apt-get update && apt-get install software-properties-common -y && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
+    apt-get update && \
+    apt-get install wget git cmake clang gcc-9 g++-9 coreutils unzip -y && \
+    curl -s -L https://gist.githubusercontent.com/junkdog/70231d6953592cd6f27def59fe19e50d/raw/92f0e73d2558402b7316021c1ab408b30e534de6/update-alternatives-clang.sh | bash -s 10 1 && \
+    wget https://d29yy0w4awjqw3.cloudfront.net/fuzz/afl/Dec/AFL-Dec-11.zip -O /tmp/AFL.zip && \
+    unzip /tmp/AFL.zip -d / && \
+    mv /AFL /afl && \
+    cd /afl && \
+    make clean && CC=gcc CFLAGS= AFL_NO_X86=1 make 2>&1 > /tmp/debug.log && \
+    cd llvm_mode && make clean && CXXFLAGS= CFLAGS= make
+
+# RUN wget https://raw.githubusercontent.com/llvm/llvm-project/5feb80e748924606531ba28c97fe65145c65372e/compiler-rt/lib/fuzzer/afl/afl_driver.cpp -O /afl/afl_driver.cpp && \
+#     # clang -Wno-pointer-sign -c /afl/llvm_mode/afl-llvm-rt.o.c -I/afl && \
+#     clang++ -stdlib=libc++ -std=c++11 -O2 -c /afl/afl_driver.cpp  && \
+#     ar r /libAFL.a *.o
+
+
+RUN wget https://d29yy0w4awjqw3.cloudfront.net/fuzz/afl/Dec/absFS.zip -O /tmp/absFS.zip && \
+    unzip /tmp/absFS.zip -d /out && \
+    git clone --recursive https://github.com/kubo/funchook.git /funchook && \
+    cd /funchook && \
+    mkdir build && cd build && \
+    CC= CXX= CXXFLAGS= CFLAGS= cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/out/abstractFS-main .. && \
+    CC= CXX= CXXFLAGS= CFLAGS= make && \
+    make install && \
+    cd /out/abstractFS-main/ && \
+    rm -rf build/* && \
+    mkdir -p build && \
+    cd build/ && \
+    CC= CXX= CXXFLAGS= CFLAGS= cmake .. && \
+    CC= CXX= CXXFLAGS= CFLAGS= make && \
+    cp fs_hook.so /tmp/ && \
+    mkdir -p /out/strace-stat/ && \
+    echo "/etc/hosts" > /out/strace-stat/open.EXIST.txt && \
+    touch /out/strace-stat/open.ENOENT.txt && \
+    mkdir -p /src

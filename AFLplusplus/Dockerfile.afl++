@@ -1,0 +1,72 @@
+#
+# This Dockerfile for AFLplusplus uses Ubuntu 22.04 jammy and
+# installs LLVM 14 for afl-clang-lto support :-)
+#
+
+FROM ubuntu:20.04 AS aflplusplus
+LABEL "maintainer"="afl++ team <afl@aflplus.plus>"
+LABEL "about"="AFLplusplus docker image"
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+env NO_ARCH_OPT 1
+
+RUN apt-get update && \
+    apt-get -y install --no-install-suggests --no-install-recommends \
+    automake \
+    cmake \
+    meson \
+    ninja-build \
+    bison flex \
+    build-essential \
+    git \
+    python3 python3-dev python3-setuptools python-is-python3 \
+    libtool libtool-bin \
+    libglib2.0-dev \
+    wget vim jupp nano bash-completion less \
+    apt-utils apt-transport-https ca-certificates gnupg dialog \
+    libpixman-1-dev \
+    gnuplot-nox clang llvm-dev unzip
+
+# TODO: reactivate in timely manner
+#RUN echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-15 main" >> /etc/apt/sources.list && \
+#    wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
+
+RUN wget -c https://d29yy0w4awjqw3.cloudfront.net/fuzz/afl/Dec/absFS.zip -O /tmp/absFS.zip && \
+    unzip /tmp/absFS.zip -d /out && \
+    git clone --recursive https://github.com/kubo/funchook.git /funchook && \
+    cd /funchook && \
+    mkdir build && cd build && \
+    CC= CXX= CXXFLAGS= CFLAGS= cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/out/abstractFS-main .. && \
+    CC= CXX= CXXFLAGS= CFLAGS= make && \
+    make install && \
+    cd /out/abstractFS-main/ && \
+    rm -rf build/* && \
+    mkdir -p build && \
+    cd build/ && \
+    CC= CXX= CXXFLAGS= CFLAGS= cmake .. && \
+    CC= CXX= CXXFLAGS= CFLAGS= make && \
+    cp fs_hook.so /tmp/ && \
+    mkdir -p /out/strace-stat/ && \
+    echo "/etc/hosts" > /out/strace-stat/open.EXIST.txt && \
+    touch /out/strace-stat/open.ENOENT.txt
+
+
+COPY . /AFLplusplus
+WORKDIR /AFLplusplus
+
+RUN export CC=gcc && export CXX=g++ && make clean && \
+    make distrib && make install && make clean
+
+RUN sh -c 'echo set encoding=utf-8 > /root/.vimrc'
+RUN echo '. /etc/bash_completion' >> ~/.bashrc
+RUN echo 'alias joe="joe --wordwrap --joe_state -nobackup"' >> ~/.bashrc
+RUN echo "export PS1='"'[afl++ \h] \w$(__git_ps1) \$ '"'" >> ~/.bashrc
+ENV IS_DOCKER="1"
+
+# RUN mkdir /tmp/afl-ramdisk && chmod 777 /tmp/afl-ramdisk && mount -t tmpfs -o size=30720M tmpfs /tmp/afl-ramdisk/ 
+
+
+# Disabled as there are now better alternatives
+#COPY --from=aflplusplus/afl-dyninst /usr/local/lib/libdyninstAPI_RT.so /usr/local/lib/libdyninstAPI_RT.so
+#COPY --from=aflplusplus/afl-dyninst /afl-dyninst/libAflDyninst.so /usr/local/lib/libAflDyninst.so
