@@ -28,6 +28,14 @@ make distrib
 
 abstractFS: Please refer to the [README](./abstractFS/README.md)
 
+### The macros in the code
+
+* `VAR_REC`: enable variable recovery mode for LLVM pass in `AFL/llvm_mode/afl-llvm-pass.so.cc`; and the macro was `AFL_LLVM_VAR_REC` in AFL++.
+* `PROFILING_SYS_USR`, `PROFILING_FORK` and `PROFILING` was for profiling of time.
+* `AFL_SNAPSHOT`: enable snapshot kernel mode
+* `AFL_RT_VAR_REC`: enable variable recover mode
+* `AFL_RT_PERSIST`: enable persistent mode with wrap for `exit`.
+
 ## Workflow for profiling
 
 ### Distribution of Time
@@ -68,4 +76,5 @@ total execution is 49928
 3. Comple `.s` to `.o`: `cd AFL/var_mode  && gcc -c /tmp/var.s`
 4. Rebuild target program with variable `AFL_VAR_SNAPSHOT=1 AFL_VAR_REC=objdump` (target binary name)
 
+Note: Setting `AFL_VAR_REC=1` environment variable is required for AFL++ to use the `AFLplusplus/instrumentation/afl-llvm-var-rec.so.cc` LLVM Pass.
 
