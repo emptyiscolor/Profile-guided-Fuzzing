@@ -40,9 +40,10 @@ abstractFS: Please refer to the [README](./abstractFS/README.md)
 
 ### Distribution of Time
 
-1. Edit `AFL/llvm_mode/afl-llvm-rt.o.c` and enable macros from line 47 to line 49 .(Edit line 47 to line 49 in `AFLplusplus/instrumentation/afl-compiler-rt.o.c` for AFLplusplus)
-2. Rebuild the target program with `afl-clang-fast`
-3. Fuzz the target program with environment variable `AFL_PERFORM_DRY_RUN_ONLY=1`, and the input seeds can be an existing corpus. 
+1. Edit `AFL/llvm_mode/afl-llvm-rt.o.c` and enable macros(starts with `PROFILING`) from line 47 to line 49 .(Edit line 47 to line 49 in `AFLplusplus/instrumentation/afl-compiler-rt.o.c` for AFLplusplus)
+2. Buid AFL with `export CFLAGS="-DPROFILING_SYS_USR=1 -DPROFILING=1 -DPROFILING_FORK=1"`
+3. Rebuild the target program with `afl-clang-fast`
+4. Fuzz the target program with environment variable `AFL_PERFORM_DRY_RUN_ONLY=1`, and the input seeds can be an existing corpus. 
 
 e.g.
 ```
