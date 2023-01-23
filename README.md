@@ -38,6 +38,8 @@ abstractFS: Please refer to the [README](./abstractFS/README.md)
 
 ## Workflow for profiling
 
+**[And example for profiling objdump](https://github.com/emptyiscolor/Profile-guided-Fuzzing/tree/main/AFL/benchmarks/binutils-2.38)**
+
 ### Distribution of Time
 
 1. Edit `AFL/llvm_mode/afl-llvm-rt.o.c` and enable macros(starts with `PROFILING`) from line 47 to line 49 .(Edit line 47 to line 49 in `AFLplusplus/instrumentation/afl-compiler-rt.o.c` for AFLplusplus)
@@ -64,7 +66,7 @@ total execution is 49928
 
 ### Global Objects
 
-**Collectiong Global Variables***:
+**Collectiong Global Variables**:
 
 1. Rebuild target program with `afl-clang-fast` variable `AFL_VAR_TRACE=1`
 2. Run target with existing corpus to collect variable info (e.g.  `for testcase in /out/output_objdump/queue/id\:0* ; do ./objdump -d $testcase ; done `)
