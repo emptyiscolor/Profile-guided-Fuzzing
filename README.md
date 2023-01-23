@@ -1,3 +1,5 @@
+**Note to reviewers: we only modified this README after the paper submission**
+
 # Profile-guided-Fuzzing
 Profile-guided System Optimizations for Accelerated Greybox Fuzzing
 
@@ -25,4 +27,45 @@ make distrib
 ```
 
 abstractFS: Please refer to the [README](./abstractFS/README.md)
+
+## Workflow for profiling
+
+### Distribution of Time
+
+1. Edit `AFL/llvm_mode/afl-llvm-rt.o.c` and enable macros from line 47 to line 49 .(Edit line 47 to line 49 in `AFLplusplus/instrumentation/afl-compiler-rt.o.c` for AFLplusplus)
+2. Rebuild the target program with `afl-clang-fast`
+3. Fuzz the target program with environment variable `AFL_PERFORM_DRY_RUN_ONLY=1`, and the input seeds can be an existing corpus. 
+
+e.g.
+```
+AFL_NO_AFFINITY=1 AFL_PERFORM_DRY_RUN_ONLY=1 afl-fuzz  -i /out/objdump_corpus -o /dev/shm/output_objdump -f /dev/shm/afl_bin_input /out/objdump -d @@
+
+# results
+Profiling information: 
+7545 ms total work, 151133 ns/work,             
+33129 ms total running, 663538 ns/run, 
+1487 ms total write testcase, 29794 ns/write             
+3005 ms total forking, 60192 ns/fork, 
+28235 ms total purely run, 565523 ns/purely run             
+44263 ns/system running, 503925 ns/user running             
+7545 ms total pre-fuzzing, 151133 ns/pre-fuzzing,             
+0 ms total post-fuzzing, 0 ns/post-fuzzing
+total execution is 49928
+```
+
+### Global Objects
+
+**Collectiong Global Variables***:
+
+1. Rebuild target program with `afl-clang-fast` variable `AFL_VAR_TRACE=1`
+2. Run target with existing corpus to collect variable info (e.g.  `for testcase in /out/output_objdump/queue/id\:0* ; do ./objdump -d $testcase ; done `)
+3. The `/tmp/.fs_globals.txt` file will be verbose information for variable. (`cat /tmp/.fs_globals.txt | sort -u > /out/global_objdump.txt`)
+
+**Rebuid Target Binary with state recovery**
+
+1. Rebuild target program with variable `AFL_VAR_SNAPSHOT=1`
+2. Generate the assembly code from variable information: `python AFL/var_mode/gen_asm.py /path/to/target_binary /out/global_objdump.txt /tmp/var.s`
+3. Comple `.s` to `.o`: `cd AFL/var_mode  && gcc -c /tmp/var.s`
+4. Rebuild target program with variable `AFL_VAR_SNAPSHOT=1 AFL_VAR_REC=objdump` (target binary name)
+
 
