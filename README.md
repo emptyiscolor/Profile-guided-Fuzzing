@@ -38,7 +38,7 @@ abstractFS: Please refer to the [README](./abstractFS/README.md)
 
 ## Workflow for profiling
 
-**[And example for profiling objdump](https://github.com/emptyiscolor/Profile-guided-Fuzzing/tree/main/AFL/benchmarks/binutils-2.38)**
+**[And example for profiling objdump](./AFL/benchmarks/binutils-2.38)**
 
 ### Distribution of Time
 
