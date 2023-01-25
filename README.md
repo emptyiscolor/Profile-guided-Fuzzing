@@ -34,7 +34,7 @@ The project consists of three main subdirectories:
 * `AFL_RT_VAR_REC`: enable variable recover mode  (`AFL/llvm_mode/afl-llvm-rt.o.c`)
 * `AFL_RT_PERSIST`: enable persistent mode with wrap for `exit`  (`AFL/llvm_mode/afl-llvm-rt.o.c`)
 
-For profiling of time consumed by fuzzing (2.2 Motivating Study), you need to enable these macros : `PROFILING_SYS_USR`, `PROFILING_FORK` and `PROFILING`, which are located in these files: 
+For profiling of time consumed by fuzzing (**2.2 Motivating Study**), you need to enable these macros : `PROFILING_SYS_USR`, `PROFILING_FORK` and `PROFILING`, which are located in these files: 
 
 * `AFL/afl-fuzz.c`
 * `AFL/llvm_mode/afl-llvm-rt.o.c`
@@ -53,7 +53,7 @@ AFLplusplus:
 make distrib
 ```
 
-abstractFS: 
+**abstractFS**: 
 
 Please refer to this separate [README](./abstractFS/README.md)
 
@@ -79,7 +79,7 @@ The following uses objdump as an example:
 ```bash
 cd AFL
 make clean
-CFLAGS="-DPROFILING_SYS_USR=1 -DPROFILING=1 -DPROFILING_FORK=1"
+CFLAGS="-DPROFILING_SYS_USR=1 -DPROFILING=1 -DPROFILING_FORK=1" make
 cd llvm_mode
 # enable macros that start with PROFILING
 make
@@ -130,7 +130,7 @@ total execution is 49928
 
 ### Reproduce the "5. Evaluation" part 
 
-#### Profile-guided state recovery
+#### Build&Run Target with "profile-guided state recovery"
 
 **Collectiong Global Objects**:
 
@@ -197,7 +197,7 @@ Then, we will get a `PM_REC` version of `objdump`, and it can be verified with t
 afl-fuzz  -i /out/seeds -o /dev/shm/output_objdump -f /dev/shm/afl_input -m none -- /out/objdump -d @@
 ```
 
-**Run Target with profile-guided OS abstraction(VOS)**
+**Run Target with "profile-guided OS abstraction(VOS)"**
 
 Follow the [README](./abstractFS/README.md) for abstractFS, and set `FS_AFL_SHM_ID` to enable `PM_VOS` or `PM_REC_VOS`
 
