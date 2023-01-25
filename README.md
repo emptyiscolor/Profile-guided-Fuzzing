@@ -57,9 +57,17 @@ abstractFS:
 
 Please refer to this separate [README](./abstractFS/README.md)
 
-## Reproduce Experiment
+* `VAR_REC`: enable variable recovery mode for LLVM pass in `AFL/llvm_mode/afl-llvm-pass.so.cc`; and the macro was `AFL_LLVM_VAR_REC` in AFL++.
+* `PROFILING_SYS_USR`, `PROFILING_FORK` and `PROFILING` was for profiling of time.
+* `AFL_SNAPSHOT`: enable snapshot kernel mode
+* `AFL_RT_VAR_REC`: enable variable recover mode
+* `AFL_RT_PERSIST`: enable persistent mode with wrap for `exit`.
 
-### Distribution of Time (2.2 Motivating Study in the paper)
+## Workflow for profiling
+
+**[And example for profiling objdump](./AFL/benchmarks/binutils-2.38)**
+
+### Distribution of Time
 
 1. Edit `AFL/llvm_mode/afl-llvm-rt.o.c` and enable macros(starts with `PROFILING`) from line 47 to line 49 .(Edit line 47 to line 49 in `AFLplusplus/instrumentation/afl-compiler-rt.o.c` for AFLplusplus)
 2. Buid AFL with `export CFLAGS="-DPROFILING_SYS_USR=1 -DPROFILING=1 -DPROFILING_FORK=1"`
@@ -135,7 +143,7 @@ total execution is 49928
 1. Rebuild target program with variable `AFL_VAR_SNAPSHOT=1`
 2. Generate the assembly code from variable information: `python AFL/var_mode/gen_asm.py /path/to/target_binary /out/global_objdump.txt /tmp/var.s`
 3. Comple `.s` to `.o`: `cd AFL/var_mode  && gcc -c /tmp/var.s`
-4. Rebuild target program with variable `AFL_VAR_SNAPSHOT=1 AFL_VAR_REC=objdump` (target binary name)
+4. Rebuild target program with environment variable `AFL_VAR_SNAPSHOT=1 AFL_VAR_REC=objdump` (target binary name)
 
 Note: Setting `AFL_VAR_REC=1` environment variable is required for AFL++ to use the `AFLplusplus/instrumentation/afl-llvm-var-rec.so.cc` LLVM Pass.
 
