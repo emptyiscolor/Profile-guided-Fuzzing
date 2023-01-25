@@ -63,11 +63,9 @@ Please refer to this separate [README](./abstractFS/README.md)
 * `AFL_RT_VAR_REC`: enable variable recover mode
 * `AFL_RT_PERSIST`: enable persistent mode with wrap for `exit`.
 
-## Workflow for profiling
+## Reproduce Experiment
 
-**[And example for profiling objdump](./AFL/benchmarks/binutils-2.38)**
-
-### Distribution of Time
+### Distribution of Time (2.2 Motivating Study)
 
 1. Edit `AFL/llvm_mode/afl-llvm-rt.o.c` and enable macros(starts with `PROFILING`) from line 47 to line 49 .(Edit line 47 to line 49 in `AFLplusplus/instrumentation/afl-compiler-rt.o.c` for AFLplusplus)
 2. Buid AFL with `export CFLAGS="-DPROFILING_SYS_USR=1 -DPROFILING=1 -DPROFILING_FORK=1"`
@@ -78,7 +76,7 @@ The following uses objdump as an example:
 
 **Option 1: Build from source code:**
 
-```
+```bash
 cd AFL
 make clean
 CFLAGS="-DPROFILING_SYS_USR=1 -DPROFILING=1 -DPROFILING_FORK=1"
@@ -128,22 +126,83 @@ Profiling information:
 total execution is 49928
 ```
 
-**[An example for profiling results of objdump](./AFL/benchmarks/binutils-2.38)**
+**A full example of result for profiling time distribution page fault and syscall of objdump: [Link](./AFL/benchmarks/binutils-2.38/README.md)**
 
-### Global Objects
+### Reproduce the "5. Evaluation" part 
 
-**Collectiong Global Variables**:
+#### Profile-guided state recovery
+
+**Collectiong Global Objects**:
 
 1. Rebuild target program with `afl-clang-fast` variable `AFL_VAR_TRACE=1`
 2. Run target with existing corpus to collect variable info (e.g.  `for testcase in /out/output_objdump/queue/id\:0* ; do ./objdump -d $testcase ; done `)
 3. The `/tmp/.fs_globals.txt` file will be verbose information for variable. (`cat /tmp/.fs_globals.txt | sort -u > /out/global_objdump.txt`)
 
-**Rebuid Target Binary with state recovery**
+Let's take `objdump` as an example:
+
+```bash
+cd binutils-2.38
+CC=afl-clang-fast ./configure --disable-shared
+make clean
+AFL_VAR_TRACE=1 make -j4
+
+# collect the variable information
+# NOTE: the corpus_objdump the AFL queue with saved test cases in it
+for testcase in ./corpus_objdump/queue/id\:0* ; do ./objdump -s $testcase ; done 
+
+cat /tmp/.fs_globals.txt | sort -u > /out/global_objdump.txt`
+```
+
+**Rebuid Target Binary with state recovery(PM_REC)**
+
+Note: Setting `AFL_VAR_REC=1` environment variable is required for AFL++.
 
 1. Rebuild target program with variable `AFL_VAR_SNAPSHOT=1`
 2. Generate the assembly code from variable information: `python AFL/var_mode/gen_asm.py /path/to/target_binary /out/global_objdump.txt /tmp/var.s`
 3. Comple `.s` to `.o`: `cd AFL/var_mode  && gcc -c /tmp/var.s`
 4. Rebuild target program with environment variable `AFL_VAR_SNAPSHOT=1 AFL_VAR_REC=objdump` (target binary name)
 
-Note: Setting `AFL_VAR_REC=1` environment variable is required for AFL++ to use the `AFLplusplus/instrumentation/afl-llvm-var-rec.so.cc` LLVM Pass.
+Let's take `objdump` as an example:
 
+```bash
+# generate the PM_REC object
+cd binutils-2.38
+CC=afl-clang-fast ./configure --disable-shared
+make clean
+AFL_VAR_SNAPSHOT=1 make -j4
+
+# /out/global_objdump.txt is the txt file with global info we collected above
+python AFL/var_mode/gen_asm.py ./binutils/objdump /out/global_objdump.txt /tmp/var.s
+# Just compile the var.s, and we will get var.o
+cd AFL/var_mode  && gcc -c /tmp/var.s
+
+# rebuild the AFL llvm runtime object
+cd AFL/llvm_mode
+# enable "AFL_RT_VAR_REC" macro at AFL/llvm_mode/afl-llvm-rt.o.c to enable the state recover mode
+make clean
+make  # It's OK to get the testing warning prompt, pls ignore it.
+cd .. && sudo make install
+
+# rebuilt the target binary
+cd /Path/to/binutils-2.38
+LDFLAGS="-Wl,-wrap,_exit -Wl,-wrap,exit -Wl,-wrap,_Exit" AFL_VAR_REC=nothing ./configure --disable-shared
+make clean
+AFL_VAR_REC=objdump AFL_VAR_SNAPSHOT=1  make -j4
+# sudo cp -f binutils/objdump /out/objdump
+```
+
+Then, we will get a `PM_REC` version of `objdump`, and it can be verified with the 100% fuzzing stability.
+
+```bash
+afl-fuzz  -i /out/seeds -o /dev/shm/output_objdump -f /dev/shm/afl_input -m none -- /out/objdump -d @@
+```
+
+**Run Target with profile-guided OS abstraction(VOS)**
+
+Follow the [README](./abstractFS/README.md) for abstractFS, and set `FS_AFL_SHM_ID` to enable `PM_VOS` or `PM_REC_VOS`
+
+e.g.
+
+```
+FS_AFL_SHM_ID=6789 afl-fuzz  -i /out/seeds -o /dev/shm/output_objdump -f /dev/shm/afl_input -m none -- /out/objdump -d @@
+```
