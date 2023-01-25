@@ -53,9 +53,7 @@ AFLplusplus:
 make distrib
 ```
 
-**abstractFS**: 
-
-Please refer to this separate [README](./abstractFS/README.md)
+**abstractFS**:  Please refer to this separate [README](./abstractFS/README.md)
 
 * `VAR_REC`: enable variable recovery mode for LLVM pass in `AFL/llvm_mode/afl-llvm-pass.so.cc`; and the macro was `AFL_LLVM_VAR_REC` in AFL++.
 * `PROFILING_SYS_USR`, `PROFILING_FORK` and `PROFILING` was for profiling of time.
@@ -191,7 +189,7 @@ AFL_VAR_REC=objdump AFL_VAR_SNAPSHOT=1  make -j4
 # sudo cp -f binutils/objdump /out/objdump
 ```
 
-Then, we will get a `PM_REC` version of `objdump`, and it can be verified with the 100% fuzzing stability.
+Then, we will get a `PM_REC` version of `objdump`, and it can be verified with the 100% fuzzing stability in persistent mode.
 
 ```bash
 afl-fuzz  -i /out/seeds -o /dev/shm/output_objdump -f /dev/shm/afl_input -m none -- /out/objdump -d @@
