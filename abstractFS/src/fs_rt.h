@@ -104,6 +104,7 @@ static int (*fclose_func)(FILE *stream);
 static ssize_t (*write_func)(int fd, const void *buf, size_t count);
 static ssize_t (*read_func)(int fd, void *buf, size_t count);
 static ssize_t (*pread_func)(int fd, void *buf, size_t count, off_t offset);
+static ssize_t (*pread64_func)(int fd, void *buf, size_t count, off64_t offset);
 static int (*lstat_func)(const char *pathname, struct stat *statbuf);
 static int (*stat_func)(const char *pathname, struct stat *statbuf);
 static int (*xstat_func)(int vers, const char *pathname, struct stat *statbuf);

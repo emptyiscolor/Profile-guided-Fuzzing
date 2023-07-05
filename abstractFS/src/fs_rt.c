@@ -195,6 +195,56 @@ static ssize_t read_hook(int fd, void *buf, size_t count)
     return count;
 }
 
+
+static ssize_t pread_hook(int fd, void *buf, size_t count, off64_t offset)
+{
+    bool is_socket = False;
+    if (count == 0)
+        return count;
+
+    abs_file_t *file_t = FS_GET_FILE_T(fd);
+    if (fd == 0)
+        file_t = fcache_fds_t[0];
+
+    if (file_t == NULL)
+    {
+        // if (!FS_VALID_SOCK(fd))
+            return pread64_func(fd, buf, count, offset);
+
+        // if (!(file_t = fcache_fds_t[TOT + fd]))
+        //     return read_func(fd, buf, count);
+
+        // is_socket = True;
+    }
+
+    if (offset < 0 || count < 0)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    if (offset > 2147483646)
+    {
+        errno = EOVERFLOW;
+        return -1;
+    }
+
+    if (offset >= file_t->dfile.stat.st_size)
+        return 0;
+
+    if (count > (file_t->dfile.stat.st_size - offset))
+        count = file_t->dfile.stat.st_size - offset;
+
+    if (count > 0)
+    {
+        memcpy(buf, file_t->dfile.contents + offset, count);
+        if (is_socket)
+            fcache_socket_events_masks[fd] |= POLLOUT | POLLWRNORM;
+    }
+
+    return count;
+}
+
 /* AFL ignores what the program prints */
 ssize_t write_hook(int fd, const void *buf, size_t count)
 {
@@ -999,6 +1049,8 @@ __attribute__((constructor)) static void ctor()
     funchook_prepare(funchook, (void **)&fclose_func, fclose_hook);
     read_func = read;
     funchook_prepare(funchook, (void **)&read_func, read_hook);
+    pread64_func = pread64;
+    funchook_prepare(funchook, (void **)&pread64_func, pread_hook);
     write_func = write;
     funchook_prepare(funchook, (void **)&write_func, write_hook);
     fstat_func = fstat;
@@ -1020,9 +1072,9 @@ __attribute__((constructor)) static void ctor()
     fcntl_func = fcntl;
     funchook_prepare(funchook, (void **)&fcntl_func, fcntl_hook);
     socket_func = socket;
-    funchook_prepare(funchook, (void **)&socket_func, socket_hook);
+    // funchook_prepare(funchook, (void **)&socket_func, socket_hook);
     socketpair_func = socketpair;
-    funchook_prepare(funchook, (void **)&socketpair_func, socketpair_hook);
+    // funchook_prepare(funchook, (void **)&socketpair_func, socketpair_hook);
     sendto_func = sendto;
     funchook_prepare(funchook, (void **)&sendto_func, sendto_hook);
     send_func = send;
@@ -1052,6 +1104,8 @@ __attribute__((constructor)) static void ctor()
         // funchook_prepare(funchook, (void **)&fopen_func, fopen_hook);
         read_func = dlsym(RTLD_NEXT, "read");
         funchook_prepare(funchook, (void **)&read_func, read_hook);
+        pread64_func = dlsym(RTLD_NEXT, "pread64");
+        funchook_prepare(funchook, (void **)&pread64_func, pread_hook);
         write_func = dlsym(RTLD_NEXT, "write");
         funchook_prepare(funchook, (void **)&write_func, write_hook);
         // stat_func = dlsym(RTLD_NEXT, "stat");
