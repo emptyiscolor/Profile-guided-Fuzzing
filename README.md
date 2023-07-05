@@ -1,5 +1,3 @@
-**Note to reviewers: we only modified this README after the paper submission**
-
 # Profile-guided-Fuzzing
 Profile-guided System Optimizations for Accelerated Greybox Fuzzing
 
