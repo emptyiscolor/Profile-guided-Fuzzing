@@ -1,6 +1,25 @@
 # Profile-guided-Fuzzing
 Profile-guided System Optimizations for Accelerated Greybox Fuzzing
 
+```
+@inproceedings{10.1145/3576915.3616636,
+author = {Zhang, Yunhang and Pang, Chengbin and Nagy, Stefan and Chen, Xun and Xu, Jun},
+title = {Profile-guided System Optimizations for Accelerated Greybox Fuzzing},
+year = {2023},
+isbn = {9798400700507},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3576915.3616636},
+doi = {10.1145/3576915.3616636},
+booktitle = {Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {1257–1271},
+numpages = {15},
+keywords = {greybox fuzzing, profile-driven, system optimizations},
+location = {Copenhagen, Denmark},
+series = {CCS '23}
+}
+```
+
 ## Code structure and explanation of terms
 
 ### Directory structure
